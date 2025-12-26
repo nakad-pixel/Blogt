@@ -1,0 +1,27 @@
+{
+  "name": "blogt",
+  "version": "1.0.0",
+  "description": "Autonomous Revenue Engine for Medium Publication Management",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "flesch-kincaid": "^1.0.5",
+    "js-yaml": "^4.1.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "node-pexels": "^2.0.1",
+    "puppeteer": "^21.6.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

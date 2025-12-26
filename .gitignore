@@ -1,0 +1,12 @@
+node_modules/
+.env
+*.log
+.DS_Store
+coverage/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.tmp
+*.bak
