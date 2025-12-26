@@ -1,0 +1,24 @@
+niche: "ai_tools"
+last_publish_date: null
+published_topics_hashes: []
+draft_queue: []
+draft_queue_max: 14
+metrics:
+  pes: 0
+  fes: 0
+  fes2: 0
+affiliate_links:
+  - url: "https://www.anthropic.com"
+    name: "Anthropic Claude"
+    category: "llm"
+    status: "active"
+  - url: "https://openai.com"
+    name: "OpenAI GPT"
+    category: "llm"
+    status: "active"
+  - url: "https://www.midjourney.com"
+    name: "Midjourney"
+    category: "image_generation"
+    status: "active"
+puppeteer_log: []
+last_failure: null
