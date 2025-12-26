@@ -1,0 +1,25 @@
+{
+  "name": "blogt",
+  "version": "1.0.0",
+  "description": "Autonomous Blog Automation System for AI Tools Niche",
+  "type": "module",
+  "main": "src/orchestrator.js",
+  "scripts": {
+    "start": "node src/orchestrator.js",
+    "test": "echo \"Tests coming soon\" && exit 0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["blog", "automation", "ai", "content-generation"],
+  "author": "Blogt Team",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "node-fetch": "^3.3.2",
+    "yaml": "^2.3.4",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
