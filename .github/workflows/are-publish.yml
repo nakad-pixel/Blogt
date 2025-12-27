@@ -1,0 +1,68 @@
+name: Blogt ARE - Daily Publish
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Run daily at 12:00 UTC
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Install Cloudflare WARP
+      run: |
+        curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+        sudo apt-get update && sudo apt-get install -y cloudflare-warp
+    
+    - name: Connect Cloudflare WARP
+      run: warp-cli connect
+    
+    - name: Wait for WARP connection
+      run: sleep 20
+    
+    - name: Validate IP
+      run: |
+        IP=$(curl -s https://api.ipify.org)
+        echo "Current IP: $IP"
+        # Simple check for Microsoft/Azure ranges
+        if [[ $IP == 20.* || $IP == 40.* || $IP == 51.* || $IP == 52.* || $IP == 104.* || $IP == 137.* ]]; then
+          echo "ERROR: IP is in Microsoft/Azure range"
+          exit 1
+        fi
+        echo "IP validation passed"
+    
+    - name: Run Blogt ARE
+      env:
+        OPENROUTER_KEY_A: ${{ secrets.OPENROUTER_KEY_A }}
+        OPENROUTER_KEY_B: ${{ secrets.OPENROUTER_KEY_B }}
+        PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        MEDIUM_COOKIES_JSON: ${{ secrets.MEDIUM_COOKIES_JSON }}
+      run: node src/index.js
+    
+    - name: Commit state changes
+      run: |
+        git config --global user.name "Blogt ARE"
+        git config --global user.email "are@blogt.com"
+        git add state.yaml
+        git commit -m "Update state [skip ci]" || echo "No changes to commit"
+        git push || echo "No changes to push"
+      if: always()
+    
+    - name: Disconnect Cloudflare WARP
+      run: warp-cli disconnect
+      if: always()

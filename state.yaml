@@ -1,0 +1,16 @@
+last_publish_date: null
+last_topic_hash: null
+topic_history: []
+error_traces:
+  - timestamp: '2025-12-26T19:58:18.973Z'
+    error: Failed to connect to Cloudflare WARP
+    stack: |-
+      Error: Failed to connect to Cloudflare WARP
+          at /home/engine/project/src/utils/cloudflareWarp.js:18:25
+          at ChildProcess.exithandler (node:child_process:430:5)
+          at ChildProcess.emit (node:events:524:28)
+          at maybeClose (node:internal/child_process:1104:16)
+          at Socket.<anonymous> (node:internal/child_process:456:11)
+          at Socket.emit (node:events:524:28)
+          at Pipe.<anonymous> (node:net:343:12)
+consecutive_low_scores: 0
